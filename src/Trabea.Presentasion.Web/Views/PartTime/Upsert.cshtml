@@ -1,0 +1,76 @@
+﻿@model PartTimeUpsertViewModel;
+
+@section title {
+    <h2>PartTime Form</h2>
+}
+
+<form method="post">
+
+        @if (Model.Id > 0) {
+            <input type="hidden" asp-for="Id" />
+        }
+        <div class="d-flex">
+            <div class="mb-3 flex-grow-1">
+                <span asp-validation-for=FirstName class="text-danger"></span>
+                <label asp-for=FirstName class="form-label"></label>
+                <input asp-for=FirstName class="form-control" />
+            </div>
+            <div class="mb-3 flex-grow-1 ms-3">
+                <span asp-validation-for=LastName class="text-danger"></span>
+                <label asp-for=LastName class="form-label"></label>
+                <input asp-for=LastName class="form-control" />
+            </div>
+        </div>
+        <div class="d-flex">
+        <div class="mb-3 flex-grow-1">
+                <span asp-validation-for=PersonalEmail class="text-danger"></span>
+                <label asp-for=PersonalEmail class="form-label"></label>
+                <input asp-for=PersonalEmail class="form-control" />
+            </div>
+        <div class="mb-3 flex-grow-1 ms-3">
+                <span asp-validation-for=Phone class="text-danger"></span>
+                <label asp-for=Phone class="form-label"></label>
+                <input asp-for=Phone class="form-control" />
+            </div>
+        </div>
+ 
+        <div class="mb-3">
+            <span asp-validation-for="Address" class="text-danger"></span>
+            <label asp-for="Address" class="form-label"></label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+
+        <div class="d-flex">
+            <div class="mb-3 flex-grow-1">
+                    <span class="d-block bg-danger rounded text-light" asp-validation-for="CurrentEducation"></span>
+                    <label asp-for="CurrentEducation" class="form-label"></label>
+                    <select asp-for="CurrentEducation" class="form-select">
+                        <option value="ElementarySchool">Elementary School (SD)</option>
+                        <option value="JuniorHighSchool">Junior High School (SMP)</option>
+                        <option value="HighSchool">High School (SMA)</option>
+                        <option value="Undergraduate">Undergraduate (S1)</option>
+                        <option value="Master">Master's Degree (S2)</option>
+                        <option value="Doctorate">Doctorate (S3)</option>
+                    </select>
+             </div>
+            <div class="mb-3 flex-grow-1 ms-3">
+                    <span class="d-block bg-danger rounded text-light" asp-validation-for="LastEducation"></span>
+                    <label asp-for="LastEducation" class="form-label"></label>
+                    <select asp-for="LastEducation" class="form-select">
+                        <option value="ElementarySchool">Elementary School (SD)</option>
+                        <option value="JuniorHighSchool">Junior High School (SMP)</option>
+                        <option value="HighSchool">High School (SMA)</option>
+                        <option value="Undergraduate">Undergraduate (S1)</option>
+                        <option value="Master">Master's Degree (S2)</option>
+                        <option value="Doctorate">Doctorate (S3)</option>
+                    </select>
+             </div>
+        </div>
+    <div class="mb-3 ">
+        <span asp-validation-for=StartDate class="text-danger"></span>
+        <label asp-for=StartDate class="form-label"></label>
+        <input type="date" asp-for=StartDate class="form-control col-md-2" />
+    </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>

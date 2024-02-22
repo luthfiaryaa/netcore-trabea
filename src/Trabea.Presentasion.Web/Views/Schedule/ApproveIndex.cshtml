@@ -1,0 +1,36 @@
+﻿@model List<ScheduleApprovalIndexViewModel>;
+
+@section title {
+    <h2>Approve Index</h2>
+}
+
+<section>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>FullName</th>
+                <th>Shift</th>
+                <th>Personal Email</th>
+                <th>IsApprove</th>
+            </tr>
+        </thead>
+        @foreach (ScheduleApprovalIndexViewModel schedule in Model) {
+            <tbody>
+                <tr>
+                    <td>
+                        <a asp-controller="Employee" asp-action="Approval" asp-route-id="@schedule.Id" class="btn btn-secondary @(schedule.IsApprove == true ? "disabled" : "")">Approve</a>
+                    </td>
+
+                    <td>@schedule.PartTime</td>
+                    <td>@schedule.Shift</td>
+                    <td>@schedule.Email</td>
+                    <td>
+                        @(schedule.IsApprove.HasValue
+                            ? (schedule.IsApprove.Value ? "Accepted" : "Reject")
+                            : "Waiting Approval")
+                    </td>
+            </tbody>
+        }
+    </table>
+</section>

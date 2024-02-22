@@ -1,0 +1,42 @@
+﻿@model ScheduleApproveViewModel;
+@using System.Security.Claims;
+
+@section title {
+    <h2>Approve Form</h2>
+}
+
+<form method="post">
+    @if (Model.Id > 0) {
+        <input type="hidden" asp-for="Id" />
+    }
+
+        @{
+            var claims = User.Claims;
+            foreach (var claim in claims) {
+                if (claim.Type == ClaimTypes.NameIdentifier) {
+                    <div class="mb-3">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" value="@claim.Value" class="form-control"  readonly/>
+                    </div>
+                }
+            }
+        } 
+
+        <div class="mb-3 flex-grow-1">
+            <span asp-validation-for="IsApproved" class="text-danger"></span>
+            <label asp-for="IsApproved" class="form-label"></label>
+
+            <div class="form-check">
+            <input asp-for="IsApproved" class="form-check-input" type="radio" value="true" id="isApproveTrue" />
+            <label class="form-check-label" for="isApproveTrue">Accept</label>
+            </div>
+
+            <div class="form-check">
+            <input asp-for="IsApproved" class="form-check-input" type="radio" value="false" id="isApproveFalse" />
+            <label class="form-check-label" for="isApproveFalse">Reject</label>
+            </div>
+        </div>
+
+    <button class="btn btn-primary">Submit Approve</button>
+</form>

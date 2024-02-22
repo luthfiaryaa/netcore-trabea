@@ -1,0 +1,67 @@
+﻿@model PartTimeIndexViewModel
+
+@section title {
+    <h2>PartTime Index</h2>
+}
+<section>
+    <div class="col-auto">
+        <a asp-action="Insert" class="btn btn-primary mb-2">Insert New PartTime</a>
+    </div>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>FullName</th>
+                <th>Office Email</th>
+                <th>Personal Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>IsActive</th>
+               
+            </tr>
+
+        </thead>
+        @foreach (var partTime in Model.PartTimes) {
+            <tbody>
+                <tr>
+                    <td >
+                        <a asp-action="UpdateForm" asp-route-id="@partTime.Id" class="btn btn-primary">Edit</a>
+
+                        <a asp-action="Active" asp-route-id="@partTime.Id" class="btn btn-secondary @(partTime.IsActive == false ? "" : "disabled")">Active</a>
+                        <a asp-action="Delete" asp-route-id="@partTime.Id" class="btn btn-danger
+                            @(partTime.OfficelEmail == null ? "disabled" : "")">Delete</a>
+                    </td>
+                    <td>@partTime.FullName</td>
+                    <td>@(string.IsNullOrEmpty(partTime.OfficelEmail) ? "Email Delete" : partTime.OfficelEmail)</td>
+                    <td>@partTime.PersonalEmail</td>
+                    <td>@partTime.Phone</td>
+                    <td>@(string.IsNullOrEmpty(partTime.Address) ? "No Address" : partTime.Address)</td>
+                    <td>@(partTime.IsActive == false ? "No" : "Yes")</td>
+                </tr>
+            </tbody>
+        }
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class=" d-flex justify-content-between ps-2 pe-2">
+                        <div>
+                            page @Model.PaginationInfo.PageNumber of @Model.PaginationInfo.TotalPages
+                        </div>
+                        <div>
+                            @for (int index = 1; index <= Model.PaginationInfo.TotalPages; index++) {
+                                <a class="btn btn-outline-secondary me-2"
+                                   asp-action="Index"
+                                   asp-route-pageNumber="@index"
+                                   asp-route-pageSize="@Model.PaginationInfo.PageSize"
+                                   >
+                                    @index
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+        
+    </table>
+</section>
