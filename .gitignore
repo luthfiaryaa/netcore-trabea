@@ -49,9 +49,6 @@ mono_crash.*
 Thumbs.db
 ehthumbs.db
 
-# Folder config file
-Desktop.ini
-
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
@@ -100,3 +97,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Exclude obj/ folders in all subfolders of src/
+src/*/obj/
